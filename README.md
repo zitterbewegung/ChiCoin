@@ -41,3 +41,5 @@ Understanding that - anyone wanting to participate should be willing to focus on
 We'll utilize [CBP Slack and #devcorner channel there](https://chiblockchainproject.slack.com/messages/C8Z50DFEF/team/U8LKKDU1K/) as primary meeting place.
 
 Github will be reserved for production communication. In that sense, do not use Issues or Project boards for extended discussion that doesn't related to "coding". If you have any questions, join Slack... it's public and open.
+
+Test change
