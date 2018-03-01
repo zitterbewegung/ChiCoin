@@ -1,4 +1,4 @@
-# ChiCoin
+﻿# ChiCoin
 
 Part of Chicago Blockchain Project (CBP) efforts is to facilitate cooperation and education in local developer community. We plan to realize those efforts through various community projects which anyone can join and contribute. ChiCoin seems as natural starting point - token that will be utilized by community in various manners.
 
@@ -41,5 +41,3 @@ Understanding that - anyone wanting to participate should be willing to focus on
 We'll utilize [CBP Slack and #devcorner channel there](https://chiblockchainproject.slack.com/messages/C8Z50DFEF/team/U8LKKDU1K/) as primary meeting place.
 
 Github will be reserved for production communication. In that sense, do not use Issues or Project boards for extended discussion that doesn't related to "coding". If you have any questions, join Slack... it's public and open.
-
-Test change
