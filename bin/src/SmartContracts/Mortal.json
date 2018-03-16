@@ -1,0 +1,22 @@
+{
+    "abi": "[{\"constant\":false,\"inputs\":[],\"name\":\"kill\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"mortal\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+    "bytecode": "6060604052341561000f57600080fd5b6101818061001e6000396000f3006060604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166341c0e1b5811461005b5780638da5cb5b14610070578063f1eae25c146100ac575b600080fd5b341561006657600080fd5b61006e6100bf565b005b341561007b57600080fd5b610083610102565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b34156100b757600080fd5b61006e61011e565b6000543373ffffffffffffffffffffffffffffffffffffffff9081169116146100e757600080fd5b60005473ffffffffffffffffffffffffffffffffffffffff16ff5b60005473ffffffffffffffffffffffffffffffffffffffff1681565b6000805473ffffffffffffffffffffffffffffffffffffffff19163373ffffffffffffffffffffffffffffffffffffffff161790555600a165627a7a723058204a56cce156a8ccb288503554ac57d965a908720afb9d3c7d7d2660882d646f610029",
+    "functionHashes": {
+        "kill()": "41c0e1b5",
+        "mortal()": "f1eae25c",
+        "owner()": "8da5cb5b"
+    },
+    "gasEstimates": {
+        "creation": [
+            124,
+            77000
+        ],
+        "external": {
+            "kill()": 30565,
+            "mortal()": 20398,
+            "owner()": 410
+        },
+        "internal": {}
+    },
+    "runtimeBytecode": "6060604052600436106100565763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166341c0e1b5811461005b5780638da5cb5b14610070578063f1eae25c146100ac575b600080fd5b341561006657600080fd5b61006e6100bf565b005b341561007b57600080fd5b610083610102565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b34156100b757600080fd5b61006e61011e565b6000543373ffffffffffffffffffffffffffffffffffffffff9081169116146100e757600080fd5b60005473ffffffffffffffffffffffffffffffffffffffff16ff5b60005473ffffffffffffffffffffffffffffffffffffffff1681565b6000805473ffffffffffffffffffffffffffffffffffffffff19163373ffffffffffffffffffffffffffffffffffffffff161790555600a165627a7a723058204a56cce156a8ccb288503554ac57d965a908720afb9d3c7d7d2660882d646f610029"
+}
