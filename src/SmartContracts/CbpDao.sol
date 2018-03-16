@@ -34,4 +34,59 @@ contract CbpDao is Mortal {
 
 		members[msg.sender] = _name;
 	}
+
+	struct LeaderboardItem {
+		bytes32 nick;
+		uint clickTime;
+	}
+
+	LeaderboardItem[] clicksHistory;
+	mapping (address => uint) clicksTotal;
+	
+	function sendClick() public returns(LeaderboardItem, uint totalClicks) {
+		LeaderboardItem memory item = LeaderboardItem(members[msg.sender], now);
+		clicksHistory.push(item);
+		
+		clicksTotal[msg.sender] += 1;
+
+		return (item, clicksTotal[msg.sender]);
+	}
+
+	// function leaderboards() public returns (bytes32[], uint[]) {		
+    // 	bytes32[] memory retNicks = new bytes32[](10);
+    // 	uint[] memory retClicks = new uint[](10);
+
+	// 	var index = clicks.length - 10;
+	// 	if (index < 0) {
+	// 		index = 0;
+	// 	}
+	// 	for (; index < clicks.length; index++) {
+	// 		var something = clicks[index].nick;
+
+	// 		retNicks.push(something);
+	// 		retClicks.push(clicks[index].clicktime);
+	// 	}
+
+	// 	return (retNicks, retClicks);
+	// }
+	
+	/*
+	function adminAdd() {
+	}
+
+	function adminRemove() {
+	}
+
+	function setupMeeting() {
+	}
+
+	function checkIn(uint meetingId) {		
+	}
+
+	function checkOut(uint meetingId) {
+	}
+
+	function distribute(uint meetingId) {
+	}
+	*/
 }

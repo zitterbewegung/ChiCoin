@@ -90,3 +90,17 @@ function showMainForm(res) {
 
   $("#username").html(web3.toAscii(res));
 }
+
+function sendClick(sender) {
+  sender.hide();
+
+  getContract().sendClick(function(err, res) {
+    if (res == 0) {
+      alert("Error");
+    } else {
+      $("#txtClickCount").html("You've clicked "+ res.totalClicks + " time(s)");
+    }
+
+    sender.show();
+  });
+}
