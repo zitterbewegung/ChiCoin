@@ -34,9 +34,25 @@ function startApp() {
         console.log('This is an unknown network.')
     }
   });
+}
 
+function getContract() {
   var cbpContract = web3.eth.contract(contractAbi).at(contractAddress);
-  cbpContract.isMember(function(err, res) {
+  return cbpContract;
+}
+
+function getName() {
+  getContract().isMember(function(err, res) {
     console.log(res);
+    $("#username").val(web3.toAscii(res));
   });
+}
+
+function changeName() {
+  var nick = $("#username").val();
+  if (nick) {
+    getContract().register(web3.fromAscii(nick), function(err, res) {
+      alert("Name changed");
+    });
+  }
 }

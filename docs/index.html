@@ -7,20 +7,32 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script src="/node_modules/web3/dist/web3.min.js"></script>
     <script src="/js/cbpdao.js"></script>
     <script src="/js/app.js"></script>
   </head>
   <body>
     <div id="root"></div>
+    <div>
+        <button onClick="getName()">Get Name</button>
+    </div>
     <script type="text/babel">
 
       ReactDOM.render(
         <h1>Hello, world!</h1>,
         document.getElementById('root')
       );
-
     </script>
+
+    <form>
+        <label>
+          Name:
+          <input id="username" type="text" value="" />
+        </label>
+        <input type="button" value="Submit" onclick="changeName()" />
+      </form>
     <!--
       Note: this page is a great way to try React but it's not suitable for production.
       It slowly compiles JSX with Babel in the browser and uses a large development build of React.
