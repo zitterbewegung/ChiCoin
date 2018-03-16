@@ -1,4 +1,10 @@
 window.addEventListener('load', function() {
+  initWeb3();
+  bindUiEvents();
+  setTimeout(startApp, 200);
+});
+
+function initWeb3() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
@@ -8,9 +14,7 @@ window.addEventListener('load', function() {
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
-
-  startApp();
-});
+}
 
 function startApp() {
   web3.version.getNetwork((err, netId) => {
@@ -34,6 +38,26 @@ function startApp() {
         console.log('This is an unknown network.')
     }
   });
+  
+  getContract().isMember(function(err, res) {
+    if (res == 0) {
+      $(".loading-form").hide();
+      $(".register-form").show();
+    } else {
+      showMainForm(res);
+    }
+  });
+}
+
+function bindUiEvents() {
+  $('.message a').click(function(){
+    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+  });
+
+  $("#btnCreateAccount").click(function() {
+    changeName();
+    return false;
+  });
 }
 
 function getContract() {
@@ -41,18 +65,39 @@ function getContract() {
   return cbpContract;
 }
 
-function getName() {
-  getContract().isMember(function(err, res) {
-    console.log(res);
-    $("#username").val(web3.toAscii(res));
-  });
-}
-
 function changeName() {
-  var nick = $("#username").val();
-  if (nick) {
+  var nick = $("#txtNickname").val();
+  if (nick) {    
+    $(".register-form").hide();
+    $(".loading-form").show();
+    $(".loading-message").val("Registering on Ethereum Blockchain...");
     getContract().register(web3.fromAscii(nick), function(err, res) {
-      alert("Name changed");
+      if (err) {
+        alert(err);
+      } else {
+        finishRegistration();
+      }
     });
   }
+}
+
+function finishRegistration() {
+  getContract().isMember(function(err, res) {
+    if (res == 0) {
+      setTimeout(2000, finishRegistration);
+    } else {
+      showMainForm(res);
+    }
+  })
+
+  $(".register-form").hide();
+  $(".loading-form").show();
+}
+
+function showMainForm(res) {
+  $(".loading-form").hide();
+  $(".register-form").hide();
+  $(".main-form").show();
+
+  $("#username").html(web3.toAscii(res));
 }
