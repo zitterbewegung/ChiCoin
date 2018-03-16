@@ -1,6 +1,5 @@
 window.addEventListener('load', function() {
   initWeb3();
-  bindUiEvents();
   setTimeout(startApp, 200);
 });
 
@@ -41,22 +40,10 @@ function startApp() {
   
   getContract().isMember(function(err, res) {
     if (res == 0) {
-      $(".loading-form").hide();
-      $(".register-form").show();
+      formState("register-form");
     } else {
       showMainForm(res);
     }
-  });
-}
-
-function bindUiEvents() {
-  $('.message a').click(function(){
-    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-  });
-
-  $("#btnCreateAccount").click(function() {
-    changeName();
-    return false;
   });
 }
 
@@ -68,12 +55,11 @@ function getContract() {
 function changeName() {
   var nick = $("#txtNickname").val();
   if (nick) {    
-    $(".register-form").hide();
-    $(".loading-form").show();
-    $(".loading-message").val("Registering on Ethereum Blockchain...");
+    formState("loading-form");
+    $(".loading-message").html("Registering on<br />Ethereum Blockchain");
     getContract().register(web3.fromAscii(nick), function(err, res) {
       if (err) {
-        alert(err);
+        formState("register-form");
       } else {
         finishRegistration();
       }
@@ -81,23 +67,26 @@ function changeName() {
   }
 }
 
+function formState(active) {
+  $(".register-form").hide();
+  $(".main-form").hide();
+  $(".loading-form").hide();
+
+  $("."+ active).show();
+} 
+
 function finishRegistration() {
   getContract().isMember(function(err, res) {
     if (res == 0) {
-      setTimeout(2000, finishRegistration);
+      setTimeout(finishRegistration, 2000);
     } else {
       showMainForm(res);
     }
-  })
-
-  $(".register-form").hide();
-  $(".loading-form").show();
+  });
 }
 
 function showMainForm(res) {
-  $(".loading-form").hide();
-  $(".register-form").hide();
-  $(".main-form").show();
+  formState("main-form");
 
   $("#username").html(web3.toAscii(res));
 }
