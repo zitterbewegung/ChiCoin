@@ -107,3 +107,11 @@ body {
   color: #333;
   margin-top: 10px;
 }
+.main-form {
+  display: none;
+  text-align: left;
+}
+
+.main-form h3 {
+  margin-top: 0px;
+}

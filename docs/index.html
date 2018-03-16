@@ -28,7 +28,25 @@
                 <button onclick="changeName(); return false;">Create Account</button>
             </form>
             <div class="main-form">
-                <label id="username"></label>
+                <h3>Welcome, <span id="username"></span>!</h3>
+                <p>We'll extend MVP to support additional use cases:
+                    <ul>
+                        <li>Allowing Organizers to start Meetup</li>
+                        <li>Anoyone registered will then see Metup as available to check-in</li>
+                        <li>Check-in will require some trivial amount of ETH and code that will be displayed during Meetup</li>
+                        <li>At the end of Meetup Organizer will review list of members checked-in, and disperse tokens</li>
+                    </ul>
+                    For now, we just fetch the list of members registered and their click-donations
+                </p>
+                <hr />
+                <h3>Click Donate</h3>
+                <p>Just for illustrating integration with Smart Contract.</p>
+                <p>
+                    <button>Come on, Click</button>
+                </p>
+                <hr />
+                <h3>Leaderboard Top 10</h3>
+                <p>Let's see who has time to waste on clicking</p>
             </div>
             <div class="loading-form">
                 <i class="fas fa-spinner-4x fa-4x fa-spin"></i>
