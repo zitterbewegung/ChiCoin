@@ -1,4 +1,4 @@
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
   initWeb3();
   setTimeout(startApp, 200);
 });
@@ -37,8 +37,8 @@ function startApp() {
         console.log('This is an unknown network.')
     }
   });
-  
-  getContract().isMember(function(err, res) {
+
+  getContract().isMember(function (err, res) {
     if (res == 0) {
       formState("register-form");
     } else {
@@ -54,10 +54,10 @@ function getContract() {
 
 function changeName() {
   var nick = $("#txtNickname").val();
-  if (nick) {    
+  if (nick) {
     formState("loading-form");
     $(".loading-message").html("Registering on<br />Ethereum Blockchain");
-    getContract().register(web3.fromAscii(nick), function(err, res) {
+    getContract().register(web3.fromAscii(nick), function (err, res) {
       if (err) {
         formState("register-form");
       } else {
@@ -72,11 +72,11 @@ function formState(active) {
   $(".main-form").hide();
   $(".loading-form").hide();
 
-  $("."+ active).show();
-} 
+  $("." + active).show();
+}
 
 function finishRegistration() {
-  getContract().isMember(function(err, res) {
+  getContract().isMember(function (err, res) {
     if (res == 0) {
       setTimeout(finishRegistration, 2000);
     } else {
@@ -94,13 +94,23 @@ function showMainForm(res) {
 function sendClick(sender) {
   $(sender).hide();
 
-  getContract().sendClick(function(err, res) {
+  getContract().sendClick(function (err, res) {
     if (err) {
       alert("Error");
+      $(sender).show();
     } else {
-      $("#txtClickCount").html("You've clicked "+ res.totalClicks + " time(s)");
+      $("#txtClickCount").html("Waiting for transaction to be confirmed");
     }
+  });
 
+  var sendClickEvent = getContract().ClicksUpdated();
+  sendClickEvent.watch(function (error, result) {
+    if (error) {
+      console.log(error);
+    } else {
+      $("#txtClickCount").html(res.nick +" clicked " + res.click + " time(s)");
+    }
+    
     $(sender).show();
   });
 }
