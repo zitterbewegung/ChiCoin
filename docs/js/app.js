@@ -92,15 +92,15 @@ function showMainForm(res) {
 }
 
 function sendClick(sender) {
-  sender.hide();
+  $(sender).hide();
 
   getContract().sendClick(function(err, res) {
-    if (res == 0) {
+    if (err) {
       alert("Error");
     } else {
       $("#txtClickCount").html("You've clicked "+ res.totalClicks + " time(s)");
     }
 
-    sender.show();
+    $(sender).show();
   });
 }

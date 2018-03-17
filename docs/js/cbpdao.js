@@ -1,4 +1,4 @@
-var contractAddress = "0x22213c54fa4bffb32d1d90ebab14eced5d494cf7";
+var contractAddress = "0x0a5746d3425030daaa9768e4d54f1ff2851c7567";
 var contractAbi = [
 	{
 		"constant": false,
@@ -39,6 +39,20 @@ var contractAbi = [
 	},
 	{
 		"constant": false,
+		"inputs": [],
+		"name": "sendClick",
+		"outputs": [
+			{
+				"name": "retClicks",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
 		"inputs": [
 			{
 				"name": "_name",
@@ -46,6 +60,15 @@ var contractAbi = [
 			}
 		],
 		"name": "register",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "mortal",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",

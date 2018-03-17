@@ -43,13 +43,14 @@ contract CbpDao is Mortal {
 	LeaderboardItem[] clicksHistory;
 	mapping (address => uint) clicksTotal;
 	
-	function sendClick() public returns(LeaderboardItem, uint totalClicks) {
+	function sendClick() public returns(uint retClicks) {
 		LeaderboardItem memory item = LeaderboardItem(members[msg.sender], now);
 		clicksHistory.push(item);
 		
-		clicksTotal[msg.sender] += 1;
+		clicksTotal[msg.sender]++;
 
-		return (item, clicksTotal[msg.sender]);
+		return clicksTotal[msg.sender];
+		//return (item, clicksTotal[msg.sender]);
 	}
 
 	// function leaderboards() public returns (bytes32[], uint[]) {		
