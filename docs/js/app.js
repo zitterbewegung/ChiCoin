@@ -92,6 +92,7 @@ function showMainForm(res) {
 }
 
 function sendClick(sender) {
+  $("#txtClickCount").html("");
   $(sender).hide();
 
   getContract().sendClick(function (err, res) {
@@ -99,7 +100,7 @@ function sendClick(sender) {
       alert("Error");
       $(sender).show();
     } else {
-      $("#txtClickCount").html("Waiting for transaction to be confirmed");
+      $("#txtClickCount").html("<i><span class='fas fa-spinner fa-spin'></span> Transaction Confirming...</i>");
     }
   });
 
@@ -108,7 +109,9 @@ function sendClick(sender) {
     if (error) {
       console.log(error);
     } else {
-      $("#txtClickCount").html(res.nick +" clicked " + res.click + " time(s)");
+      var res = result.args;
+      var textToInsert = web3.toAscii(res.nick) +" clicked " + res.clicks.toNumber() + " time(s)";
+      $("#txtClickCount").html("<br /><br /><center>"+ textToInsert +"</center>");
     }
     
     $(sender).show();
