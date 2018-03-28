@@ -77,22 +77,26 @@ contract CbpDao is Mortal {
 	// }
 	
 	/*
-	function adminAdd() {
+	function organizerAdd() {
+		// adding person who can organize a meetup
+		// only organizer can add new organizers
 	}
 
-	function adminRemove() {
+	function organizerRemove(bytes32[] organizer) {
+		// remove certain organizer
 	}
 
-	function setupMeeting() {
+	function setupMeetup(uint minutes) {
+		// happens at the end of the meetup
 	}
 
-	function checkIn(uint meetingId) {		
-	}
-
-	function checkOut(uint meetingId) {
+	function memberAttendence(uint meetingId) {
+		// members check in to be added to the list of those in the meetup
+		// this is MVP so we can't forbid people from checking in remote
 	}
 
 	function distribute(uint meetingId) {
+		// organizer calls this to distribute the tokens to attendence
 	}
 	*/
 	
