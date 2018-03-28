@@ -1,5 +1,19 @@
-var contractAddress = "0xc1900361384082f77aae1eeee297a6ad3012bd03";
+var contractAddress = "0x5ca4e98455b30ae7a8bdcb4d9eefc9f40173e4d7";
 var contractAbi = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "testSomething",
+		"outputs": [
+			{
+				"name": "something",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"constant": false,
 		"inputs": [],

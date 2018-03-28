@@ -27,6 +27,7 @@
                 <input id="txtNickname" type="text" placeholder="Nickname. How should we call you?" />
                 <button onclick="changeName(); return false;">Create Account</button>
             </form>
+            
             <div class="main-form">
                 <h3>Welcome, <span id="username"></span>!</h3>
                 <p>We'll extend MVP to support additional use cases:
@@ -44,6 +45,10 @@
                 <p>
                     <button onclick="sendClick(this)">Come on, Click</button>
                     <span id="txtClickCount"></span>
+                </p>
+                <p>
+                    <button onclick="clickSomething(this)">Something</button>
+                    <span id="txtSomething"></span>
                 </p>
             </div>
             <div class="loading-form">

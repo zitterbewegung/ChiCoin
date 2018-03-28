@@ -95,4 +95,9 @@ contract CbpDao is Mortal {
 	function distribute(uint meetingId) {
 	}
 	*/
+	
+	// code changes for Meetup
+	function testSomething() public constant returns (string something) {
+	    return "something";
+	}
 }

@@ -117,3 +117,10 @@ function sendClick(sender) {
     $(sender).show();
   });
 }
+
+// code changes for meetup
+function clickSomething(sender) {
+  getContract().testSomething(function(err, res) {
+    $("#txtSomething").html(res);
+  });
+}
