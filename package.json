@@ -1,0 +1,54 @@
+{
+  "name": "chicoin",
+  "version": "1.0.0",
+  "description": "Part of Chicago Blockchain Project (CBP) efforts is to facilitate cooperation and education in local developer community. We plan to realize those efforts through various community projects which anyone can join and contribute. ChiCoin seems as natural starting point - token that will be utilized by community in various manners.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "nodemon main.js --exec babel-node --presets es2015,stage-2",
+    "test": "mocha --compilers js:babel-core/register",
+    "unit": "karma start test/karma.conf.js --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChicagoBlockchainProject/ChiCoin.git"
+  },
+  "keywords": [
+    "crypto",
+    "chicagocrypto",
+    "blockchain",
+    "chicagoBlockChainProject"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChicagoBlockchainProject/ChiCoin/issues"
+  },
+  "homepage": "https://github.com/ChicagoBlockchainProject/ChiCoin#readme",
+  "dependencies": {
+    "ganache-cli": "^6.1.0",
+    "js-sha256": "^0.9.0",
+    "jshint": "^2.9.5",
+    "solc": "^0.4.21",
+    "web3": "^1.0.0-beta.26"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "babel-register": "^6.11.6",
+    "jasmine-core": "^3.1.0",
+    "mocha": "^5.0.5",
+    "nodemon": "^1.10.0"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}

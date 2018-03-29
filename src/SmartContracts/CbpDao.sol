@@ -1,21 +1,6 @@
 pragma solidity ^0.4.4;
 
-contract Mortal {
-	address public owner;
-	function mortal() public {
-		owner = msg.sender;
-	}
-
-	modifier onlyOwner {
-		require(msg.sender == owner);
-		
-		_;
-	}
-
-	function kill() onlyOwner public {
-		selfdestruct(owner);
-	}
-}
+import "./MortalContract.sol";
 
 contract CbpDao is Mortal {
 	mapping (address => bytes32) members;
