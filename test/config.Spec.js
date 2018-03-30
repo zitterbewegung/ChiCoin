@@ -8,11 +8,11 @@ const value = "testnet";
 
 beforeEach(async () => {
   // Set up default network
-  network = store.set(key, value);
+  network = await store.set(key, value);
 });
 
 describe("Config", () => {
-  it.only("test store returns default value", () => {
+  it("test store returns default value", () => {
     const storevalue = store.get(key);
     assert.strictEqual(
       value,
@@ -22,7 +22,7 @@ describe("Config", () => {
     assert.equal();
   });
 
-  it.only("should be able to set a new value for network", () => {
+  it("should be able to set a new value for network", () => {
     const newValue = 'blank';
     store.set(key, newValue);
     const storeValue = store.get(key, value);

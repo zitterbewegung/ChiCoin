@@ -25,4 +25,7 @@ export default {
   getNetwork() {
     return this.get('network', 'testnet')
   },
+  setNetwork(value) {
+    return this.set('network', value);
+  }
 }

@@ -29,6 +29,9 @@
   },
   "homepage": "https://github.com/ChicagoBlockchainProject/ChiCoin#readme",
   "dependencies": {
+    "aes256": "^1.0.3",
+    "bip39": "^2.5.0",
+    "bitcoinjs-lib": "^3.3.2",
     "ganache-cli": "^6.1.0",
     "js-sha256": "^0.9.0",
     "jshint": "^2.9.5",
