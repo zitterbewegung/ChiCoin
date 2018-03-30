@@ -14,7 +14,7 @@ beforeEach(async () => {
 });
 
 describe("Keyfile", () => {
-  it.only("should be able to encode file and decode", () => {
+  it("should be able to encode file and decode", () => {
     const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
     const privateKey = webWallet.getPrivKey();
     const encodedData = keyfile.encode(privateKey, password);
