@@ -28,8 +28,18 @@ describe("Wallet", () => {
       const address = '19FwLgcWQMLNxe1WXM1DZsP7sB2xuKs85u';
       const mockPrivateKey = 'KwtianqP3xRZxNToi5jmUQbtBWkCQokpz1YerSup8RiLuytK28xh';
       const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
-      assert.strictEqual(webWallet.getAddress(), address, "should be able to generate same address");
-      assert.strictEqual(webWallet.getPrivKey(), mockPrivateKey, "should match private key")
+      assert.strictEqual(address, webWallet.getAddress(), "should be able to generate same address");
+      assert.strictEqual(mockPrivateKey, webWallet.getPrivKey(), "should match private key")
   });
+
+
+  it.only("should be able to restore from private key", () => {
+    const password = 'sincityofmyadventure';
+    const address = '19FwLgcWQMLNxe1WXM1DZsP7sB2xuKs85u';
+    const mockPrivateKey = 'KwtianqP3xRZxNToi5jmUQbtBWkCQokpz1YerSup8RiLuytK28xh';
+    const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
+    const restoreWallet = Wallet.restoreFromWif(mockPrivateKey);
+    assert.strictEqual(address, restoreWallet.getAddress(), "should have same address");
+});
 
 });

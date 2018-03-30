@@ -47,4 +47,9 @@ export default class Wallet {
     return new Wallet(keyPair);
   }
 
+  static restoreFromWif(wif) {
+    let keyPair = bitcoinjs.ECPair.fromWIF(wif, network)
+    return new Wallet(keyPair)
+  }
+
 }
