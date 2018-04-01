@@ -1,6 +1,6 @@
 import bip39 from "bip39";
 import config from "./config";
-var bitcoinjs = require('bitcoinjs-lib');
+const bitcoinjs = require('bitcoinjs-lib');
 
 const unit = "CHI";
 let network = {};
