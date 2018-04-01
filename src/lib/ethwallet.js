@@ -2,6 +2,7 @@ import bip39 from "bip39";
 import config from "./config";
 import ethUtil from "ethereumjs-util";
 
+const HDKey = require("hdkey");
 const bitcoinjs = require("bitcoinjs-lib");
 
 const unit = "CHI";
