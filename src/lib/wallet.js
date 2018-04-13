@@ -3,6 +3,7 @@ import bip39 from "bip39";
 const bitcoinjs = require("bitcoinjs-lib");
 
 const unit = "CHI";
+const DERIVATION_PATH = "m/44'/0'/0'/0";
 
 let network = {};
 switch (config.getNetwork()) {
@@ -16,8 +17,9 @@ switch (config.getNetwork()) {
  * KeyPair: accepts private key
  */
 export default class Wallet {
-  constructor(keyPair) {
-    this.keyPair = keyPair;
+  constructor(extendedKey) {
+    this.extendedKey = extendedKey;
+    this.keyPair = extendedKey.keyPair;
     this.info = {
       address: this.getAddress(),
       balance: "loading",
@@ -32,15 +34,35 @@ export default class Wallet {
   getAddress() {
     return this.keyPair.getAddress();
   }
-  getLanguage() {
-    return language;
+  calculateBip32KeyRoot() {
+    const pathBits = DERIVATION_PATH.split("/");
+    let extendedKey = this.extendedKey;
+    pathBits.forEach(bit => {
+      const index = parseInt(bit);
+      if (isNaN(index)) {
+        return;
+      }
+      const hardened = bit[bit.length - 1] == "'";
+      const isPriv = !extendedKey.isNeutered();
+      const invalidDerivationPath = hardened && !isPriv;
+      if (invalidDerivationPath) {
+        extendedKey = null;
+      } else if (hardened) {
+        extendedKey = extendedKey.deriveHardened(index);
+      } else {
+        extendedKey = extendedKey.derive(index);
+      }
+    });
+    console.log(extendedKey.getAddress());
+    console.log(extendedKey.neutered().toBase58());
+
+    return extendedKey;
   }
 
   static restoreFromMnemonic(mnemonic, password) {
     let seedHex = bip39.mnemonicToSeedHex(mnemonic, password);
     let account = bitcoinjs.HDNode.fromSeedHex(seedHex, network);
-    let keyPair = account.keyPair;
-    return new Wallet(keyPair);
+    return new Wallet(account);
   }
 
   static restoreFromWif(wif) {
@@ -48,3 +70,8 @@ export default class Wallet {
     return new Wallet(keyPair);
   }
 }
+const mnemonic = "lonely mango bachelor jewel turn allow box reject silk rent desert cage service avocado olympic";
+const password = 'sincityofmyadventure';
+const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
+webWallet.calculateBip32KeyRoot();
+console.log(webWallet.getAddress())

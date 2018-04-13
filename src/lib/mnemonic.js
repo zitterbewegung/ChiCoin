@@ -2,9 +2,6 @@ import bip39 from "bip39";
 const ENGLISH_WORDLIST = require("../../node_modules/bip39/wordlists/english.json");
 const FRENCH_WORDLIST = require("../../node_modules/bip39/wordlists/french.json");
 
-const strength = 128;
-const language = "english";
-
 function init() {
   
 }
