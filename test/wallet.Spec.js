@@ -17,14 +17,6 @@ beforeEach(async () => {
 
 describe("Wallet", () => {
 
-  it("should return a new Mnemonic on call of generateMnemonic", () => {
-    assert.ok(Wallet.generateMnemonic(), "should be able to generate Mnemonic");
-  });
-
-  it("should be able to validate Mnemonic", () => {
-    assert.ok(Wallet.validateBip39Mnemonic(mnemonic));
-  });
-
   it("should be able to get key pair from Mnemonic and password", () => {
       const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
       assert.strictEqual(address, webWallet.getAddress(), "should be able to generate same address");

@@ -1,8 +1,9 @@
-import bip39 from "bip39";
 import config from "./config";
-const bitcoinjs = require('bitcoinjs-lib');
+import bip39 from "bip39";
+const bitcoinjs = require("bitcoinjs-lib");
 
 const unit = "CHI";
+
 let network = {};
 switch (config.getNetwork()) {
   case "main":
@@ -26,20 +27,15 @@ export default class Wallet {
     this.transactionList = [];
   }
   getPrivKey() {
-    return this.keyPair.toWIF()
+    return this.keyPair.toWIF();
   }
   getAddress() {
     return this.keyPair.getAddress();
   }
-
-  static generateMnemonic() {
-    return bip39.generateMnemonic();
+  getLanguage() {
+    return language;
   }
 
-  static validateBip39Mnemonic(mnemonic) {
-    return bip39.validateMnemonic(mnemonic);
-  }
-  
   static restoreFromMnemonic(mnemonic, password) {
     let seedHex = bip39.mnemonicToSeedHex(mnemonic, password);
     let account = bitcoinjs.HDNode.fromSeedHex(seedHex, network);
@@ -48,8 +44,7 @@ export default class Wallet {
   }
 
   static restoreFromWif(wif) {
-    let keyPair = bitcoinjs.ECPair.fromWIF(wif, network)
-    return new Wallet(keyPair)
+    let keyPair = bitcoinjs.ECPair.fromWIF(wif, network);
+    return new Wallet(keyPair);
   }
-
 }
