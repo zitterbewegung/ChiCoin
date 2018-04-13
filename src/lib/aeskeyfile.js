@@ -4,31 +4,31 @@ const VERSION = '0.1'
 
 function parse(str) {
     try {
-        let res = JSON.parse(str)
+        let res = JSON.parse(str);
         if (res.version != VERSION) {
-            return null
+            return null;
         }
-        return res.content
+        return res.content;
     }
     catch (e) {
-        return null
+        return null;
     }
 }
 
 function decode(content, password) {
-    return aes.decrypt(password + VERSION, content)
+    return aes.decrypt(password + VERSION, content);
 }
 
 function build(content) {
-    let res = {
+    const res = {
         version: VERSION,
         content: content
-    }
-    return JSON.stringify(res)
+    };
+    return JSON.stringify(res);
 }
 
 function encode(content, password) {
-    return aes.encrypt(password + VERSION, content)
+    return aes.encrypt(password + VERSION, content);
 }
 
 export default {
@@ -36,4 +36,4 @@ export default {
     decode,
     build,
     encode
-}
+};
