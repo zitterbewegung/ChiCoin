@@ -17,9 +17,9 @@ switch (config.getNetwork()) {
  * KeyPair: accepts private key
  */
 export default class Wallet {
-  constructor(extendedKey) {
+  constructor(extendedKey, keyPair) {
     this.extendedKey = extendedKey;
-    this.keyPair = extendedKey.keyPair;
+    this.keyPair = !keyPair ? extendedKey.keyPair : keyPair;
     this.info = {
       address: this.getAddress(),
       balance: "loading",
@@ -67,11 +67,11 @@ export default class Wallet {
 
   static restoreFromWif(wif) {
     let keyPair = bitcoinjs.ECPair.fromWIF(wif, network);
-    return new Wallet(keyPair);
+    return new Wallet(null, keyPair);
   }
 }
-const mnemonic = "lonely mango bachelor jewel turn allow box reject silk rent desert cage service avocado olympic";
-const password = 'sincityofmyadventure';
-const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
-webWallet.calculateBip32KeyRoot();
-console.log(webWallet.getAddress())
+// const mnemonic = "lonely mango bachelor jewel turn allow box reject silk rent desert cage service avocado olympic";
+// const password = 'sincityofmyadventure';
+// const webWallet  = Wallet.restoreFromMnemonic(mnemonic, password);
+// webWallet.calculateBip32KeyRoot();
+// console.log(webWallet.getAddress())
