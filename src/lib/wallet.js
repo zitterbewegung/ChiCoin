@@ -1,25 +1,26 @@
 import config from "./config";
 import bip39 from "bip39";
-const bitcoinjs = require("bitcoinjs-lib");
+import bitcoinjs from "./bitcoin.js";
 
 const unit = "CHI";
-const DERIVATION_PATH = "m/44'/0'/0'/0";
+const DERIVATION_PATH = "m/44'/1'/0'/0";
 
 let network = {};
 switch (config.getNetwork()) {
   case "main":
-    network = "mainnetObj";
+    network = bitcoinjs.bitcoin.networks.bitcoin;
     break;
   default:
-    network = bitcoinjs.testnet;
+    network = bitcoinjs.bitcoin.networks.testnet;
 }
+
 /**
  * KeyPair: accepts private key
  */
 export default class Wallet {
-  constructor(extendedKey, keyPair) {
-    this.extendedKey = extendedKey;
-    this.keyPair = !keyPair ? extendedKey.keyPair : keyPair;
+  constructor(rootkey, keyPair) {
+    this.rootkey = rootkey;
+    this.keyPair = !keyPair ? rootkey.keyPair : keyPair;
     this.info = {
       address: this.getAddress(),
       balance: "loading",
@@ -32,11 +33,21 @@ export default class Wallet {
     return this.keyPair.toWIF();
   }
   getAddress() {
-    return this.keyPair.getAddress();
+    const extendedKey = this.calculateBip32ExtendedKeyRoot();
+    const key = extendedKey.derive(0);
+    const keyPair = key.keyPair;
+    const address = keyPair.getAddress().toString();
+    return address;
+}
+  getPublicKey() {
+    
   }
-  calculateBip32KeyRoot() {
+  getRootKey() {
+    return this.rootkey;
+  }
+  calculateBip32ExtendedKeyRoot() {
     const pathBits = DERIVATION_PATH.split("/");
-    let extendedKey = this.extendedKey;
+    let extendedKey = this.rootkey;
     pathBits.forEach(bit => {
       const index = parseInt(bit);
       if (isNaN(index)) {
@@ -53,15 +64,12 @@ export default class Wallet {
         extendedKey = extendedKey.derive(index);
       }
     });
-    console.log(extendedKey.getAddress());
-    console.log(extendedKey.neutered().toBase58());
-
     return extendedKey;
   }
 
   static restoreFromMnemonic(mnemonic, password) {
     let seedHex = bip39.mnemonicToSeedHex(mnemonic, password);
-    let account = bitcoinjs.HDNode.fromSeedHex(seedHex, network);
+    let account = bitcoinjs.bitcoin.HDNode.fromSeedHex(seedHex, network);
     return new Wallet(account);
   }
 

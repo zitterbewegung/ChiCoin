@@ -20,11 +20,11 @@ export default class Mnemonic {
     }
   }
 
-  generateMnemonic() {
+  generate() {
     return bip39.generateMnemonic(this.strength, null, DEFAULT_WORDLIST);
   }
 
-  static validateBip39Mnemonic(mnemonic) {
+  static validate(mnemonic) {
     return bip39.validateMnemonic(mnemonic);
   }
 }

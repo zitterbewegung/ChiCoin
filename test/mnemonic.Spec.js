@@ -12,11 +12,11 @@ describe("Mnemonic", () => {
 
   it("should return a new Mnemonic on call of generateMnemonic", () => {
     const mnemoic = new Mnemonic();
-    assert.ok(mnemoic.generateMnemonic(), "should be able to generate Mnemonic");
+    assert.ok(mnemoic.generate(), "should be able to generate Mnemonic");
   });
 
   it("should be able to validate Mnemonic", () => {
-    assert.ok(Mnemonic.validateBip39Mnemonic(DEFAULT_MNEMONIC));
+    assert.ok(Mnemonic.validate(DEFAULT_MNEMONIC));
   });
 
 });
