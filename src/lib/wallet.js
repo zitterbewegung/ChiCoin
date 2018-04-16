@@ -2,7 +2,8 @@ import config from "./config";
 import bip39 from "bip39";
 import bitcoinjs from "./bitcoin.js";
 
-const unit = "CHI";
+const unit = "btc";
+const isSegwit = true;
 const DERIVATION_PATH = "m/44'/1'/0'/0";
 
 let network = {};
@@ -11,7 +12,7 @@ switch (config.getNetwork()) {
     network = bitcoinjs.bitcoin.networks.bitcoin;
     break;
   default:
-    network = bitcoinjs.bitcoin.networks.testnet;
+    network = bitcoinjs.bitcoin.networks.bitcoin;
 }
 
 /**
@@ -28,19 +29,48 @@ export default class Wallet {
       erc20: []
     };
     this.transactionList = [];
+    this.init();
   }
-  getPrivKey() {
-    return this.keyPair.toWIF();
-  }
-  getAddress() {
+  init() {
     const extendedKey = this.calculateBip32ExtendedKeyRoot();
     const key = extendedKey.derive(0);
     const keyPair = key.keyPair;
-    const address = keyPair.getAddress().toString();
-    return address;
-}
+    this.address = keyPair.getAddress().toString();
+    // get privkey
+    var hasPrivkey = !key.isNeutered();
+    this.privkey = "NA";
+    if (hasPrivkey) {
+      this.privkey = keyPair.toWIF(network);
+    }
+    // get pubkey
+    this.pubkey = keyPair.getPublicKeyBuffer().toString('hex');
+    // Segwit addresses are different
+    if (isSegwit) {
+      if (!segwitAvailable) {
+          return;
+      }
+      if (isP2wpkh) {
+          var keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
+          var scriptpubkey = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
+          address = bitcoinjs.bitcoin.address.fromOutputScript(scriptpubkey, network)
+      }
+      else if (isP2wpkhInP2sh) {
+          var keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
+          var scriptsig = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
+          var addressbytes = bitcoinjs.bitcoin.crypto.hash160(scriptsig);
+          var scriptpubkey = bitcoinjs.bitcoin.script.scriptHash.output.encode(addressbytes);
+          address = bitcoinjs.bitcoin.address.fromOutputScript(scriptpubkey, network)
+      }
+    } 
+  }
+  getPrivateKey() {
+    return this.privkey;
+  }
+  getAddress() {
+    return this.address;
+  }
   getPublicKey() {
-    
+    return this.pubkey;
   }
   getRootKey() {
     return this.rootkey;

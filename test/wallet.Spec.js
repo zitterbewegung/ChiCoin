@@ -45,12 +45,12 @@ describe("Wallet", () => {
     );
     assert.strictEqual(
       mockPublicKey,
-      pubkey,
+      webWallet.getPublicKey(),
       "should be able to generate same public Key"
     );
     assert.strictEqual(
       mockPrivateKey,
-      privkey,
+      webWallet.getPrivateKey(),
       "should be able to generate same privateKey"
     );
   });
